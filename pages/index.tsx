@@ -2,8 +2,10 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { BaseLayout } from 'components/BaseLayout'
-import styles from './home.module.css'
+import { Card } from 'components/Card'
 import { Hero } from 'components/Hero'
+
+import styles from './home.module.css'
 
 const Home: NextPage = () => {
   return (
@@ -18,6 +20,7 @@ const Home: NextPage = () => {
         <p className={styles.Lead}>
           Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.
         </p>
+        <Card />
       </Hero>
       <div className={styles.grid}>
         <a href="https://nextjs.org/docs" className={styles.card}>
