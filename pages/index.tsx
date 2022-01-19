@@ -3,10 +3,11 @@ import Head from 'next/head'
 import { BaseLayout } from 'components/BaseLayout'
 import { Card } from 'components/Card'
 import { ChangeRate } from 'components/ChangeRate'
-import { LayoutedContent } from 'components/LayoutedContent'
 import { Container } from 'components/Container'
 import { Hero } from 'components/Hero'
 import { Icon } from 'components/Icon'
+import { List } from 'components/List'
+import { LayoutedContent } from 'components/LayoutedContent'
 
 import styles from './home.module.css'
 
@@ -39,8 +40,9 @@ const Home: NextPage = () => {
       </Hero>
       <Container>
         <h2>A breakdown of CHSB&rsquo;s circulating supply</h2>
-        <LayoutedContent mobileInverted></LayoutedContent>
-      </section>
+        <LayoutedContent mobileInverted>
+          <List></List>
+        </LayoutedContent>
       </Container>
     </BaseLayout>
   )
