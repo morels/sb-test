@@ -1,0 +1,23 @@
+.LayoutedContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 1140px) {
+  .LayoutedContent {
+    flex-direction: row;
+  }
+  .LayoutedContent[data-mobile-inverted='true'] {
+    flex-direction: row-reverse;
+  }
+
+  .LayoutedContent :nth-child(1) {
+    flex:1;
+  }
+
+  .LayoutedContent :nth-child(2) {
+    flex:2;
+  }
+  
+}
