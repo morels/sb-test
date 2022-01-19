@@ -1,7 +1,7 @@
 import React, { CSSProperties, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 
-import styles from 'container.module.css';
+import styles from './container.module.css';
 
 type Props = PropsWithChildren<{
   className?: string;
