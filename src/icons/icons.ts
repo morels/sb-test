@@ -9,4 +9,8 @@ export const icons: Record<IconNames, IconData> = {
     src: '/icons/Crypto.svg',
     alt: 'CHSB',
   },
+  ArrowDown: {
+    src: '/icons/icons_l_1_system.svg',
+    alt: 'Arrow down',
+  },
 };

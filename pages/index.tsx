@@ -4,6 +4,7 @@ import { BaseLayout } from 'components/BaseLayout'
 import { Card } from 'components/Card'
 import { ChangeRate } from 'components/ChangeRate'
 import { Hero } from 'components/Hero'
+import { Icon } from 'components/Icon'
 
 import styles from './home.module.css'
 
@@ -30,6 +31,7 @@ const Home: NextPage = () => {
             />
           )}
         />
+        <Icon name="ArrowDown" />
       </Hero>
       <div className={styles.grid}>
         <a href="https://nextjs.org/docs" className={styles.card}>
