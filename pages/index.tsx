@@ -1,8 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
 import { BaseLayout } from 'components/BaseLayout'
 import { Card } from 'components/Card'
+import { ChangeRate } from 'components/ChangeRate'
 import { Hero } from 'components/Hero'
 
 import styles from './home.module.css'
@@ -20,7 +20,16 @@ const Home: NextPage = () => {
         <p className={styles.Lead}>
           Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.
         </p>
-        <Card />
+        <Card
+          header={(
+            <ChangeRate
+              currencyFrom="USD"
+              currencyTo="CHSB"
+              text="USD 0.213"
+              percentage="-4.8% 24Hours"
+            />
+          )}
+        />
       </Hero>
       <div className={styles.grid}>
         <a href="https://nextjs.org/docs" className={styles.card}>
