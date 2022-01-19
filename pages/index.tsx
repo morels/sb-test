@@ -4,6 +4,7 @@ import { BaseLayout } from 'components/BaseLayout'
 import { Card } from 'components/Card'
 import { ChangeRate } from 'components/ChangeRate'
 import { LayoutedContent } from 'components/LayoutedContent'
+import { Container } from 'components/Container'
 import { Hero } from 'components/Hero'
 import { Icon } from 'components/Icon'
 
@@ -18,26 +19,29 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero>
-        <h1>CHSB Performance Metrics</h1>
-        <p className={styles.Lead}>
-          Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.
-        </p>
-        <Card
-          header={(
-            <ChangeRate
-              currencyFrom="USD"
-              currencyTo="CHSB"
-              text="USD 0.213"
-              percentage="-4.8% 24Hours"
-            />
-          )}
-        />
-        <Icon name="ArrowDown" />
+        <Container>
+          <h1>CHSB Performance Metrics</h1>
+          <p className={styles.Lead}>
+            Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.
+          </p>
+          <Card
+            header={(
+              <ChangeRate
+                currencyFrom="USD"
+                currencyTo="CHSB"
+                text="USD 0.213"
+                percentage="-4.8% 24Hours"
+              />
+            )}
+          />
+          <Icon name="ArrowDown" />
+        </Container>
       </Hero>
-      <section>
+      <Container>
         <h2>A breakdown of CHSB&rsquo;s circulating supply</h2>
         <LayoutedContent mobileInverted></LayoutedContent>
       </section>
+      </Container>
     </BaseLayout>
   )
 }
