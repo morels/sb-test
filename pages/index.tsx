@@ -6,10 +6,12 @@ import { ChangeRate } from 'components/ChangeRate'
 import { Container } from 'components/Container'
 import { Hero } from 'components/Hero'
 import { Icon } from 'components/Icon'
-import { List } from 'components/List'
 import { LayoutedContent } from 'components/LayoutedContent'
+import { List } from 'components/List'
+import { ListItem } from 'components/ListItem'
 
 import styles from './home.module.css'
+import React from 'react'
 
 const Home: NextPage = () => {
   return (
@@ -35,13 +37,49 @@ const Home: NextPage = () => {
               />
             )}
           />
-          <Icon name="ArrowDown" />
+          <Icon name="arrow-down" />
         </Container>
       </Hero>
       <Container>
         <h2>A breakdown of CHSB&rsquo;s circulating supply</h2>
         <LayoutedContent mobileInverted>
-          <List></List>
+          <List>
+            <ListItem
+              iconName="supply"
+              label="Remaining circulating supply"
+              text="626,112,442"
+            />
+            <ListItem
+              iconName="diamond"
+              label="CHSB Staked"
+              text={(
+                <React.Fragment>
+                  <p className='Sub-headline'>76,675,000</p>
+                  <p>(<b>10.75%</b> of Circulating supply)</p>
+                </React.Fragment>
+              )}
+            />
+            <ListItem
+              iconName="yield"
+              label="CHSB in Smart Yield"
+              text={(
+                <>
+                  <p className='Sub-headline'>76,675,000</p>
+                  <p>(<b>10.75%</b> of Circulating supply)</p>
+                </>
+              )}
+            />
+            <ListItem
+              iconName="burned"
+              label="Circulating supply burned"
+              text="2,416,345"
+            />
+            <ListItem
+              iconName="buyback"
+              label="CHSB in buyback pool"
+              text="13,456"
+            />
+          </List>
         </LayoutedContent>
       </Container>
     </BaseLayout>

@@ -1,4 +1,11 @@
-export type IconNames = 'USD' | 'CHSB' | 'ArrowDown';
+export type IconNames = 'USD'
+  | 'CHSB'
+  | 'arrow-down'
+  | 'burned'
+  | 'buyback'
+  | 'diamond'
+  | 'supply'
+  | 'yield';
 
 export type IconData = {
   src: string;
