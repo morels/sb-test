@@ -12,6 +12,8 @@ import { List } from 'components/List'
 import { ListItem } from 'components/ListItem'
 import { Lead } from 'components/Lead'
 import { Title } from 'components/Title'
+import { LineChart } from 'components/LineChart'
+
 import styles from './home.module.css'
 
 const Home: NextPage = () => {
@@ -41,7 +43,9 @@ const Home: NextPage = () => {
                 percentage="-4.8% 24Hours"
               />
             )}
-          />
+          >
+            <LineChart />
+          </Card>
           <div className="text-center">
             <Icon className={styles.ArrowDown} name="arrow-down" />
           </div>
