@@ -13,6 +13,7 @@ import { ListItem } from 'components/ListItem'
 import { Lead } from 'components/Lead'
 import { Title } from 'components/Title'
 import { LineChart } from 'components/LineChart'
+import { PieChart } from 'components/PieChart'
 
 import styles from './home.module.css'
 
@@ -91,6 +92,7 @@ const Home: NextPage = () => {
               text="13,456"
             />
           </List>
+          <PieChart />
         </LayoutedContent>
       </Container>
     </BaseLayout>
