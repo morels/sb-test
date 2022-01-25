@@ -1,0 +1,7 @@
+.Icon {
+  width: 48px;
+  height: 48px;
+  flex-grow: 0;
+  margin: 0 4px 0 0;
+  object-fit: contain;
+}

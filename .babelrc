@@ -4,7 +4,8 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "components": "./components",
+        "components": "./src/components",
+        "icons": "./src/icons",
         "styles": "./styles"
       }
     }]

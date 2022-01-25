@@ -1,0 +1,57 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 12px;
+  background-color: rgba(25, 30, 41, 0.2);
+}
+
+.Icons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+  flex-wrap: nowrap;
+}
+
+.Arrow {
+  position: absolute;
+  background-color: #000000;
+  color: #cccccc;
+  width: 16px;
+  height: 16px;
+  margin: 16px 42px;
+  padding: 4px;
+  border-radius: 25px;
+}
+
+.Arrow::after {
+  content:'>';
+  display: block;
+  line-height: 0;
+  margin: 3px 0 0 1px;
+  font-size: 10px;
+}
+
+.TextContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.TextContainer p {
+  display: block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.Text {
+  color: white;
+  font-size: 18px;
+}
+
+.Percentage {
+  color: green;
+  font-size: 12px;
+}

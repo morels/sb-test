@@ -1,0 +1,1 @@
+export { LayoutedContent } from './layouted-content';
