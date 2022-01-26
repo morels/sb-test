@@ -1,0 +1,10 @@
+.XTick {
+  font-size: var(--font-size-14-px);
+  line-height: var(--line-height-15);
+}
+
+.YTick {
+  font-size: var(--font-size-16-px);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-15);
+}
