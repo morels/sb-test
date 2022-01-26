@@ -1,0 +1,11 @@
+.text-center {
+  text-align: center;
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.font-size-26 {
+  font-size: var(--font-size-26-px);
+}

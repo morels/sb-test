@@ -1,0 +1,51 @@
+@custom-selector :--headings h1, h2, h3, h4, h5, h6, .H1, .H2, .H3, .H4, .H5, .H6;
+@custom-selector :--blocks h1, h2, h3, h4, h5, h6, ul, p, figure, img;
+
+:--headings {
+  color: var(--dark);
+}
+
+h1, .H1 {
+  font-size: var(--font-size-40-px);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-25);
+}
+
+h2, .H2 {
+  font-size: var(--font-size-28-px);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-21);
+}
+
+.Lead {
+  font-size: var(--font-size-22-px);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-33);
+}
+
+.Subheadline {
+  font-size: var(--font-size-17-px);
+  line-height: var(--line-height-18);
+  font-weight: var(--font-weight-medium);
+  margin: 0;
+  color: var(--primary);
+}
+
+:--blocks {
+  margin-top: 0;
+}
+
+p {
+  font-size: var(--font-size-16-px);
+  line-height: var(--line-height-50);
+}
+
+small {
+  font-size: var(--font-size-12-px);
+  line-height: var(--line-height-33);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

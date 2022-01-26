@@ -5,12 +5,11 @@ import styles from './container.module.css';
 
 type Props = PropsWithChildren<{
   className?: string;
-  style?: CSSProperties;
 }>;
 
-export const Container = ({ style, children, ...props }: Props) => (
+export const Container = ({ children, className, ...props }: Props) => (
   <section
-    className={clsx(styles.Container, style)}
+    className={clsx(styles.Container, className)}
     {...props}
   >
     {children}

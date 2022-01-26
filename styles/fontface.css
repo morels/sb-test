@@ -1,0 +1,26 @@
+/**
+ * Declare Regular Font Face
+ */
+
+ @font-face {
+  font-family: 'TT Commons';
+  font-weight: 400;
+  font-style: normal;
+  src:
+    local('TT Commons Regular'),
+    url('/fonts/TT-Commons-Regular.woff2') format('woff2');
+}
+
+/**
+ * Declare Medium Font Face
+ */
+
+@font-face {
+  font-family: 'TT Commons';
+  font-weight: 600;
+  font-style: normal;
+  src:
+    local('TT Commons DemiBold'),
+    url('/fonts/TT-Commons-DemiBold.woff2') format('woff2');
+}
+

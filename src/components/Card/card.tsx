@@ -1,12 +1,14 @@
 import React, { PropsWithChildren } from 'react';
+import clsx from 'clsx';
 import styles from './card.module.css';
 
 type Props = PropsWithChildren<{
   header?: React.ReactNode;
+  className?: string;
 }>
 
-export const Card = ({ header, children }: Props) => (
-  <div className={styles.Container}>
+export const Card = ({ header, children, className }: Props) => (
+  <div className={clsx(styles.Container, className)}>
     <div className={styles.Header}>
       {header}
     </div>

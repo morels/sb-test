@@ -1,4 +1,5 @@
 .Hero {
+  padding: calc(var(--space-px) * 3) 0 var(--space-px) 0;
   background-image: url("/images/background_hexagon_dark_2_desktop_1.png");
   background-size: cover;
   background-position: center center;
