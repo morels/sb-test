@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { Icon } from 'components/Icon';
 import { IconNames } from 'icons/index';
 
@@ -21,7 +21,7 @@ export const ListItem = ({ iconName, label, text }: Props) => (
       </p>
       <div className={styles.ValueContainer}>
         {typeof text === 'string'
-          ? <p className='Sub-headline'>{text}</p>
+          ? <p className="Subheadline font-size-26">{text}</p>
           : text}
       </div>
     </div>

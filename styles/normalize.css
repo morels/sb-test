@@ -1,0 +1,4 @@
+/* Import postcss-normalize based on
+* the browserslist configuration.
+*/
+@import-normalize;

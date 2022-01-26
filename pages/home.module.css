@@ -1,0 +1,27 @@
+.Title {
+  margin-bottom: calc(var(--space-px) * 1.33);
+}
+
+.Lead {
+  margin-bottom: calc(var(--space-px) * 3.5);
+}
+
+.Card {
+  margin-bottom: calc(var(--space-px) * 1.6);
+}
+
+.Content {
+  margin-bottom: calc(var(--space-px) * 3.5);
+}
+
+.SectionTitle {
+  margin: calc(var(--space-px) * 1.6) 0 calc(var(--space-px) * 1.6);
+}
+
+.CirculatingSupply {
+  font-size: var(--font-size-16-px);
+  margin: 0;
+  color: var(--primary);
+  line-height: var(--line-height-18);
+
+}
