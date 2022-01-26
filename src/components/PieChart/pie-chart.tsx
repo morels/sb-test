@@ -1,5 +1,4 @@
-import moment from 'moment';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   Cell,
   Legend,
@@ -52,26 +51,16 @@ const COLORS = ['#ccf3e8', '#13e5bf', '#364053', '#9373ff'];
 const AREA_HEIGHT = 161;
 const AREA_WIDTH = 334;
 const CHART_ASPECT_RATIO = AREA_WIDTH / AREA_HEIGHT;
-const CHART_WIDTH = 24;
 const ICON_SIZE = 16;
 export const Chart = () => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
-  const div = useCallback(node => {
-    if (node !== null) {
-      setHeight(node.getBoundingClientRect().height * CHART_ASPECT_RATIO);
-      setWidth(node.getBoundingClientRect().width);
-    }
-  }, []);
-
-  const renderCusomizedLegend = (props) => {
+  const renderCusomizedLegend = useCallback((props) => {
     const { payload: items } = props;
     return (
       <ul className="recharts-customized-legend" style={{ padding: 0, margin: 0, textAlign: "left" }}>
         {
           items.map((item, i) => {
             const { color, type, value } = item;
-            console.log('item', item);
+            // console.log('item', item);
             return (
               <li
                 key={`${i}`}
@@ -89,12 +78,13 @@ export const Chart = () => {
         }
       </ul >
     )
-  };
+  }, []);
 
   return (
-    <div style={{ width: "100%", height: "159px" }} ref={div}>
-      {height && width && <ResponsiveContainer>
-        <PieChart height={height} width={width} data={data}
+    <div style={{ maxWidth: 500, margin: "0 auto" }}>
+      <ResponsiveContainer width="100%" aspect={CHART_ASPECT_RATIO} >
+        <PieChart
+          data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
@@ -108,10 +98,10 @@ export const Chart = () => {
             nameKey="name"
             cx="50%"
             cy="50%"
-            innerRadius={(AREA_HEIGHT / 2) - CHART_WIDTH}
-            outerRadius={AREA_HEIGHT / 2}
+            innerRadius="50%"
             labelLine={false}
-            fill="#8884d8" >
+            fill="#8884d8"
+          >
             {data.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
@@ -123,9 +113,10 @@ export const Chart = () => {
             iconSize={ICON_SIZE}
             iconType="circle"
             content={renderCusomizedLegend}
+            wrapperStyle={{ right: 0 }}
           />
         </PieChart>
-      </ResponsiveContainer>}
+      </ResponsiveContainer>
     </div>
   )
 };
