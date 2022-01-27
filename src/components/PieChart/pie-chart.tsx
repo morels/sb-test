@@ -76,8 +76,8 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
   ], [rawData]);
 
   return (
-    <div style={{ maxWidth: 500, margin: "0 auto" }}>
-      {typeof rawData !== 'undefined' && <ResponsiveContainer width="100%" aspect={CHART_ASPECT_RATIO} >
+    <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
+      <ResponsiveContainer width="100%" aspect={CHART_ASPECT_RATIO}>
         <PieChart
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -111,7 +111,7 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
             wrapperStyle={{ right: 0 }}
           />
         </PieChart>
-      </ResponsiveContainer>}
+      </ResponsiveContainer>
     </div>
   )
 };
