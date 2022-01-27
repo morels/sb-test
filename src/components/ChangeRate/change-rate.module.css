@@ -5,6 +5,10 @@
   gap: var(--gutter);
   padding: calc(var(--gutter) * 2 ) var(--gutter);
   background-color: var(--dark-base-20);
+
+  @media(min-width: 1240px) {
+    flex-direction: row;
+  }
 }
 
 .Icons {
@@ -48,11 +52,16 @@
 }
 
 .Text {
+  font-size: var(--font-size-22-px);
   color: var(--white);
-  font-size: 22px;
+
+  @media(min-width: 1240px) {
+    font-size: var(--font-size-28-px);
+    font-weight: var(--font-weight-medium);
+  }
 }
 
 .Percentage {
   color: var(--primary);
-  font-size: 16px;
+  font-size: var(--font-size-16-px);
 }

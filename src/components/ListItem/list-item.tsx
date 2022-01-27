@@ -22,7 +22,7 @@ export const ListItem = ({ iconName, label, text }: Props) => (
       <div className={styles.ValueContainer}>
         {React.isValidElement(text)
           ? text
-          : <p className="Subheadline font-size-26">{text}</p>
+          : <p className="Subheadline">{text}</p>
         }
       </div>
     </div>

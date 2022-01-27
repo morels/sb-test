@@ -9,4 +9,4 @@ export const LayoutedContent = ({ mobileInverted, children }: Props) => (
   <div className={styles.LayoutedContent} data-mobile-inverted={mobileInverted}>
     {children}
   </div>
-)
+);

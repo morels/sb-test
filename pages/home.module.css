@@ -12,10 +12,19 @@
 
 .Content {
   margin-bottom: calc(var(--space-px) * 3.5);
+
+  @media(min-width: 1240px) {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .SectionTitle {
   margin: calc(var(--space-px) * 1.6) 0 calc(var(--space-px) * 1.6);
+  @media(min-width: 1240px) {
+    margin: 100px 0 50px;
+  }
 }
 
 .CirculatingSupply {
@@ -23,5 +32,17 @@
   margin: 0;
   color: var(--primary);
   line-height: var(--line-height-18);
+  @media(min-width: 1240px){
+    font-size: var(--font-size-22-px);
+    line-height: var(--line-height-15);
+  }
+}
 
+.HeroContent {
+  @media(min-width: 1240px) {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: calc(var(--space-px) * 5);
+  }
 }
