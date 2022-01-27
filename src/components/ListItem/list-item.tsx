@@ -20,9 +20,10 @@ export const ListItem = ({ iconName, label, text }: Props) => (
         {label}
       </p>
       <div className={styles.ValueContainer}>
-        {typeof text === 'string'
-          ? <p className="Subheadline font-size-26">{text}</p>
-          : text}
+        {React.isValidElement(text)
+          ? text
+          : <p className="Subheadline font-size-26">{text}</p>
+        }
       </div>
     </div>
   </li>
