@@ -16,7 +16,7 @@ export default async (
   if (process.env.NODE_ENV === "development") {
     res.setHeader('Content-Type', 'application/json');
     res.statusCode = 200;
-    return res.end(JSON.stringify({ data: metrics }));
+    return res.end(JSON.stringify(metrics));
   }
   else {
     const apiPath = url?.replace('/api', '').split('?')[0];

@@ -36,7 +36,7 @@ const MetricsProvider: FC = ({ children }) => {
   const [metrics, setMetrics] = useState<Metrics>();
 
   const getDailyPrice = useCallback(async () => {
-    const data = await MetricsAPI.getDailyPrice();
+    const {data} = await MetricsAPI.getDailyPrice();
 
     setDailyPrice(data);
     return data;
@@ -44,7 +44,7 @@ const MetricsProvider: FC = ({ children }) => {
   }, []);
 
   const getMetrics = useCallback(async () => {
-    const data = await MetricsAPI.getMetrics();
+    const {data} = await MetricsAPI.getMetrics();
     setMetrics(data);
     return data;
   }, []);
