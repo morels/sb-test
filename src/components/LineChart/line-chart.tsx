@@ -1,48 +1,22 @@
 import moment from 'moment';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback } from 'react';
 import { AreaChart, LineChart, XAxis, YAxis, CartesianGrid, Tooltip, Area, Line, ResponsiveContainer } from 'recharts';
+import { DailyPrice } from 'src/metrics';
 import Tokens from 'styles/tokens.json';
 
 import styles from './line-chart.module.css';
 
 type Tick = ((props: any) => React.ReactElement<SVGElement>);
 
-const data = [
-  {
-    price: 1.126,
-    time: "2021-05-16T01:17:00.000Z"
-  },
-  {
-    price: 1.127,
-    time: "2021-05-16T01:18:00.000Z"
-  },
-  {
-    price: 1.125,
-    time: "2021-05-16T01:19:00.000Z"
-  },
-  {
-    price: 1.126,
-    time: "2021-05-16T01:20:00.000Z"
-  },
-  {
-    price: 1.122,
-    time: "2021-05-16T01:21:00.000Z"
-  },
-  {
-    price: 1.126,
-    time: "2021-05-16T01:22:00.000Z"
-  },
-  {
-    price: 1.125,
-    time: "2021-05-16T01:23:00.000Z"
-  },
-];
+type Props = {
+  data: DailyPrice;
+};
 
 const formatXAxis = (tickItem: string) => moment(tickItem).format('HH:mm');
 
 const formatYAxis = (tickItem: number) => tickItem.toFixed(3);
 
-export const Chart = () => {
+export const Chart: React.FC<Props> = ({ data }) => {
   const CustomizedYTick: Tick = useCallback(({ fill, height, orientation, stroke, payload: { value }, type, width, x, y, index }) => {
     if (Number.parseInt(index) !== 0)
       return (

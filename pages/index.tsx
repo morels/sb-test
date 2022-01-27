@@ -14,10 +14,23 @@ import { Lead } from 'components/Lead'
 import { Title } from 'components/Title'
 import { LineChart } from 'components/LineChart'
 import { PieChart } from 'components/PieChart'
+import { MetricsAPI } from 'src/metrics/api'
+import { DailyPrice, Metrics } from 'src/metrics'
+import { useNumberFormat } from 'src/number-format'
 
 import styles from './home.module.css'
 
-const Home: NextPage = () => {
+type Props = {
+  dailyPrice: DailyPrice;
+  metrics: Metrics;
+}
+const Home: NextPage<Props> = ({ dailyPrice, metrics }) => {
+
+  const { numberFormat } = useNumberFormat();
+
+  const changeRate = dailyPrice[dailyPrice.length - 1].price;
+  const changeRateRelative = ((dailyPrice[dailyPrice.length - 1].price - dailyPrice[0].price) / dailyPrice[0].price) * 100;
+
   return (
     <BaseLayout>
       <Head>
@@ -40,12 +53,12 @@ const Home: NextPage = () => {
               <ChangeRate
                 currencyFrom="USD"
                 currencyTo="CHSB"
-                text="USD 0.213"
-                percentage="-4.8% 24Hours"
+                text={numberFormat(changeRate, 'currency')}
+                percentage={`${numberFormat(changeRateRelative, 'percent')} 24Hours`}
               />
             )}
           >
-            <LineChart />
+            <LineChart data={dailyPrice} />
           </Card>
           <div className="text-center">
             <Icon className={styles.ArrowDown} name="arrow-down" />
@@ -59,15 +72,15 @@ const Home: NextPage = () => {
             <ListItem
               iconName="supply"
               label="Remaining circulating supply"
-              text="626,112,442"
+              text={numberFormat(metrics.chsbCirculatingSupplyTokens)}
             />
             <ListItem
               iconName="diamond"
               label="CHSB Staked"
               text={(
                 <React.Fragment>
-                  <p className="Subheadline font-size-26">76,675,000</p>
-                  <p className={styles.CirculatingSupply}>(<b>10.75%</b> of Circulating supply)</p>
+                  <p className="Subheadline font-size-26">{numberFormat(metrics.chsbStackedTokens)}</p>
+                  <p className={styles.CirculatingSupply}>(<b>{numberFormat(metrics.chsbStackedPercentage, 'percentAbsolute')}</b> of Circulating supply)</p>
                 </React.Fragment>
               )}
             />
@@ -76,15 +89,15 @@ const Home: NextPage = () => {
               label="CHSB in Smart Yield"
               text={(
                 <>
-                  <p className="Subheadline font-size-26">76,675,000</p>
-                  <p className={styles.CirculatingSupply}>(<b>10.75%</b> of Circulating supply)</p>
+                  <p className="Subheadline font-size-26">{numberFormat(metrics.chsbYieldPledgedTokens)}</p>
+                  <p className={styles.CirculatingSupply}>(<b>{numberFormat(metrics.chsbInYieldPercentage, 'percentAbsolute')}</b> of Circulating supply)</p>
                 </>
               )}
             />
             <ListItem
               iconName="burned"
               label="Circulating supply burned"
-              text="2,416,345"
+              text={numberFormat(metrics.chsbBurnedTokens)}
             />
             <ListItem
               iconName="buyback"
@@ -92,11 +105,22 @@ const Home: NextPage = () => {
               text="13,456"
             />
           </List>
-          <PieChart />
+          <PieChart data={metrics} />
         </LayoutedContent>
       </Container>
     </BaseLayout>
   )
+}
+
+export async function getServerSideProps() {
+
+  const dailyPrice = await MetricsAPI.getDailyPrice();
+
+  const metrics = await MetricsAPI.getMetrics();
+
+  return {
+    props: { dailyPrice, metrics },
+  }
 }
 
 export default Home
