@@ -17,16 +17,13 @@ type Metrics = {
   totalSupplyBurnedPercentage: number;
 }
 
+type DailyPrice = Price[];
+
 type MetricsContextType = {
-  dailyPrice?: Price[];
+  dailyPrice?: DailyPrice;
   metrics?: Metrics,
   getDailyPrice: any;
   getMetrics: any;
-};
-
-const initialValue = {
-  dailyPrice: undefined,
-  metrics: undefined,
 };
 
 const MetricsContext = React.createContext<MetricsContextType | null>(null);
@@ -66,7 +63,7 @@ const useMetrics = () => useContext(MetricsContext)!;
 
 export type {
   Metrics,
-  Price,
+  DailyPrice,
 }
 
 export {
