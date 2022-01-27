@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { ReactNode, useCallback, useMemo } from 'react';
 import {
   Cell,
   Legend,
@@ -9,14 +9,8 @@ import {
   Symbols,
   Text
 } from 'recharts';
+import { Props as LegendProps } from 'recharts/types/component/DefaultLegendContent';
 import { Metrics } from 'src/metrics';
-
-const labels = {
-  chsbStackedPercentage: "Stacked",
-  chsbInYieldPercentage: "In Yield",
-  totalSupplyBurnedPercentage: "Burned",
-  chsbCirculatingSupplyTokens: "Circulating supply",
-}
 
 const COLORS = ['#ccf3e8', '#13e5bf', '#364053', '#9373ff'];
 
@@ -30,12 +24,12 @@ type Props = {
 };
 
 export const Chart: React.FC<Props> = ({ data: rawData }) => {
-  const renderCusomizedLegend = useCallback((props) => {
+  const renderCusomizedLegend = useCallback<(props: LegendProps) => ReactNode>((props) => {
     const { payload: items } = props;
     return (
       <ul className="recharts-customized-legend" style={{ padding: 0, margin: 0, textAlign: "left" }}>
         {
-          items.map((item, i) => {
+          items && items.map((item, i) => {
             const { color, type, value } = item;
             return (
               <li
@@ -46,7 +40,7 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
                   style={{ display: "inline-block", verticalAlign: "middle", marginRight: 4 }}>
                   <Symbols cx={ICON_SIZE / 2} cy={ICON_SIZE / 2} type="circle" size={ICON_SIZE} fill={color} sizeType="diameter" />
                 </Surface>
-                <Text style={{ fontSize: 18, color: "#8f96a1" }} >{labels[value]}</Text>
+                <Text style={{ fontSize: 18, color: "#8f96a1" }} >{value}</Text>
               </li >
             )
           }
@@ -58,19 +52,19 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
 
   const data = useMemo(() => [
     {
-      name: "chsbStackedPercentage",
+      name: "Stacked",
       value: rawData["chsbStackedPercentage"],
     },
     {
-      name: "chsbInYieldPercentage",
+      name: "In Yield",
       value: rawData["chsbInYieldPercentage"],
     },
     {
-      name: "totalSupplyBurnedPercentage",
+      name: "Burned",
       value: rawData["totalSupplyBurnedPercentage"],
     },
     {
-      name: "chsbCirculatingSupplyTokens",
+      name: "Circulating supply",
       value: 100 - rawData["chsbStackedPercentage"] - rawData["chsbInYieldPercentage"] - rawData["totalSupplyBurnedPercentage"]
     },
   ], [rawData]);
