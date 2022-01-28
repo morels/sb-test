@@ -38,9 +38,9 @@ const Home: NextPage<Props> = ({ dailyPrice, metrics }) => {
   return (
     <BaseLayout>
       <Meta
-        title='CHSB Performance Metrics'
+        title='CHSB test page | Performance Metrics'
         description='Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.'
-        image='/images/SwissBorg-token-CHSB-overview.jpeg'
+        image={`${process.env.NEXT_PUBLIC_DOMAIN}/images/SwissBorg-token-CHSB-overview.jpeg`}
         name='CHSB test page'
       >
         <link rel="preload" href="/fonts/TT-Commons-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
