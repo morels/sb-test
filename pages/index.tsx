@@ -1,6 +1,7 @@
-import React from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import React from 'react'
+import { useMedia } from 'react-use';
 import { BaseLayout } from 'components/BaseLayout'
 import { Card } from 'components/Card'
 import { ChangeRate } from 'components/ChangeRate'
@@ -19,6 +20,7 @@ import { DailyPrice, Metrics } from 'src/metrics'
 import { useNumberFormat } from 'src/number-format'
 
 import styles from './home.module.css'
+import Tokens from 'styles/tokens.json'
 
 type Props = {
   dailyPrice: DailyPrice;
@@ -30,6 +32,7 @@ const Home: NextPage<Props> = ({ dailyPrice, metrics }) => {
 
   const changeRate = dailyPrice[dailyPrice.length - 1].price;
   const changeRateRelative = ((dailyPrice[dailyPrice.length - 1].price - dailyPrice[0].price) / dailyPrice[0].price) * 100;
+  const isDesktop = useMedia(`(min-width: 1240px)`);
 
   return (
     <BaseLayout>
@@ -42,7 +45,7 @@ const Home: NextPage<Props> = ({ dailyPrice, metrics }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero>
-        <Container>
+        <Container className={styles.HeroContent}>
           <Title className={styles.Title}>CHSB Performance Metrics</Title>
           <Lead className={styles.Lead}>
             Deep-dive into the statistics of CHSB and understand the mechanics of the full SwissBorg Ecosystem.
@@ -55,14 +58,15 @@ const Home: NextPage<Props> = ({ dailyPrice, metrics }) => {
                 currencyTo="CHSB"
                 text={numberFormat(changeRate, 'currency')}
                 percentage={`${numberFormat(changeRateRelative, 'percent')} 24Hours`}
+                percentageColor={changeRateRelative < 0 ? Tokens.red : Tokens.primary}
               />
             )}
           >
             <LineChart data={dailyPrice} />
           </Card>
-          <div className="text-center">
+          {!isDesktop && <div className="text-center">
             <Icon className={styles.ArrowDown} name="arrow-down" />
-          </div>
+          </div>}
         </Container>
       </Hero>
       <Container className={styles.Content}>

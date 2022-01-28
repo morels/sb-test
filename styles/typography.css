@@ -9,18 +9,31 @@ h1, .H1 {
   font-size: var(--font-size-40-px);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-25);
+
+  @media (min-width: 1240px) {
+    font-size: var(--font-size-80-px);
+    line-height: var(--line-height-15);
+  }
 }
 
 h2, .H2 {
   font-size: var(--font-size-28-px);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-21);
+  
+  @media (min-width: 1240px) {
+    font-size: var(--font-size-48-px);
+    line-height: var(--line-height-15);
+  }
 }
 
 .Lead {
   font-size: var(--font-size-22-px);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-33);
+  @media (min-width: 1240px) {
+    line-height: var(--line-height-15);
+  }
 }
 
 .Subheadline {
@@ -38,6 +51,10 @@ h2, .H2 {
 p {
   font-size: var(--font-size-16-px);
   line-height: var(--line-height-50);
+  @media (min-width: 1240px) {
+    font-size: var(--font-size-18-px);
+    line-height: var(--line-height-15);
+  }
 }
 
 small {

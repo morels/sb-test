@@ -1,6 +1,8 @@
 import React, { ReactNode, useCallback, useMemo } from 'react';
+import { useMedia } from 'react-use';
 import {
   Cell,
+  Layer,
   Legend,
   Pie,
   PieChart,
@@ -12,7 +14,7 @@ import {
 import { Props as LegendProps } from 'recharts/types/component/DefaultLegendContent';
 import { Metrics } from 'src/metrics';
 
-const COLORS = ['#ccf3e8', '#13e5bf', '#364053', '#9373ff'];
+import Tokens from 'styles/tokens.json';
 
 const AREA_HEIGHT = 161;
 const AREA_WIDTH = 334;
@@ -50,35 +52,87 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
     )
   }, []);
 
+  const renderCustomizedLabel = useCallback((props) => {
+    // Maths inspired by https://github.com/recharts/recharts/issues/490#issuecomment-498274850
+    const RADIAN = Math.PI / 180;
+    const diffAngle = props.endAngle - props.startAngle;
+    const delta = ((360 - diffAngle) / 15) - 1;
+    const radius = props.innerRadius + (props.outerRadius - props.innerRadius);
+    const x = props.cx + (radius + delta) * Math.cos(-props.midAngle * RADIAN);
+    const y = props.cy + (radius + delta) * Math.sin(-props.midAngle * RADIAN);
+    return (
+      <Layer>
+        <Text
+          cx={props.cx}
+          cy={props.cy}
+          fill={Tokens.neutral}
+          stroke={props.stroke}
+          name={props.name}
+          id={props.id}
+          x={x}
+          y={y}
+          dominantBaseline="central"
+          className="recharts-text recharts-pie-label-text"
+          textAnchor={x > props.cx ? 'start' : 'end'}
+        >
+          {props.name}
+        </Text>
+      </Layer>
+    );
+  }, []);
+
+
   const data = useMemo(() => [
     {
       name: "Stacked",
       value: rawData["chsbStackedPercentage"],
+      id: 'stacked',
     },
     {
       name: "In Yield",
       value: rawData["chsbInYieldPercentage"],
+      id: 'yield',
     },
     {
       name: "Burned",
       value: rawData["totalSupplyBurnedPercentage"],
+      id: 'burned',
     },
     {
       name: "Circulating supply",
-      value: 100 - rawData["chsbStackedPercentage"] - rawData["chsbInYieldPercentage"] - rawData["totalSupplyBurnedPercentage"]
+      value: 100 - rawData["chsbStackedPercentage"] - rawData["chsbInYieldPercentage"] - rawData["totalSupplyBurnedPercentage"],
+      id: 'circulating',
     },
   ], [rawData]);
 
+  const isDesktop = useMedia(`(min-width: 1240px)`);
+
   return (
     <div style={{ width: "100%", maxWidth: 500, margin: "0 auto" }}>
-      <ResponsiveContainer width="100%" aspect={CHART_ASPECT_RATIO}>
+      <ResponsiveContainer
+        width="100%"
+        aspect={isDesktop ? undefined : CHART_ASPECT_RATIO}
+        debounce={250}
+      >
         <PieChart
           data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
-            <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#01c38d" stopOpacity={0.6} />
-              <stop offset="95%" stopColor="#01c38d" stopOpacity={0} />
+            <linearGradient id="circulating-gradient" >
+              <stop offset="0%" stopColor="#CCF3E8" />
+              <stop offset="100%" stopColor="#93fcde" />
+            </linearGradient>
+            <linearGradient id="stacked-gradient" >
+              <stop offset="0%" stopColor="#13E5BF" />
+              <stop offset="100%" stopColor="#01C38D" />
+            </linearGradient>
+            <linearGradient id="burned-gradient" >
+              <stop offset="0%" stopColor="#364053" />
+              <stop offset="100%" stopColor="#191E29" />
+            </linearGradient>
+            <linearGradient id="yield-gradient" >
+              <stop offset="0%" stopColor="#9373FF" />
+              <stop offset="100%" stopColor="#5A3FFF" />
             </linearGradient>
           </defs>
           <Pie
@@ -90,12 +144,14 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
             innerRadius="50%"
             labelLine={false}
             fill="#8884d8"
+            label={isDesktop ? renderCustomizedLabel : undefined}
+            legendType='circle'
           >
-            {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+            {data.map(({ id }, index) => (
+              <Cell key={`cell-${index}`} fill={`url(#${id}-gradient)`} />
             ))}
           </Pie>
-          <Legend
+          {!isDesktop && <Legend
             verticalAlign='middle'
             align='right'
             layout='vertical'
@@ -103,7 +159,7 @@ export const Chart: React.FC<Props> = ({ data: rawData }) => {
             iconType="circle"
             content={renderCusomizedLegend}
             wrapperStyle={{ right: 0 }}
-          />
+          />}
         </PieChart>
       </ResponsiveContainer>
     </div>

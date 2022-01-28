@@ -8,8 +8,9 @@ type Props = {
   currencyTo: IconNames;
   text: string;
   percentage: string;
+  percentageColor?: string;
 }
-export const ChangeRate = ({ currencyFrom, currencyTo, text, percentage }: Props) => (
+export const ChangeRate = ({ currencyFrom, currencyTo, text, percentage, percentageColor }: Props) => (
   <div className={styles.Container}>
     <div className={styles.Icons}>
       <Icon name={currencyFrom} />
@@ -18,7 +19,10 @@ export const ChangeRate = ({ currencyFrom, currencyTo, text, percentage }: Props
     </div>
     <div className={styles.TextContainer}>
       <p className={styles.Text}>{text}</p>
-      <p className={styles.Percentage}>{percentage}</p>
+      <p
+        className={styles.Percentage}
+        style={percentageColor ? { color: percentageColor } : undefined}
+      >{percentage}</p>
     </div>
   </div>
 );
